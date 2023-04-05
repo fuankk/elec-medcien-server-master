@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.elecmed.mapper.BreathHeartMonitorMapper">
+
+    <resultMap type="BreathHeartMonitor" id="BreathHeartMonitorResult">
+        <result property="id"    column="id"    />
+        <result property="deviceId"    column="device_id"    />
+        <result property="time"    column="time"    />
+        <result property="frameId"    column="frame_id"    />
+        <result property="outputfilterbreathout"    column="outputFilterBreathOut"    />
+        <result property="outputfilterheartout"    column="outputFilterHeartOut"    />
+        <result property="breathingrateOut"    column="BreathingRate_Out"    />
+        <result property="heartrateOut"    column="heartRate_Out"    />
+        <result property="rangebinindexmax"    column="rangeBinIndexMax"    />
+        <result property="rangebinindexphase"    column="rangeBinIndexPhase"    />
+        <result property="maxval"    column="maxVal"    />
+        <result property="processingcyclesout"    column="processingCyclesOut"    />
+        <result property="rangebinstartindex"    column="rangeBinStartIndex"    />
+        <result property="rangebinendindex"    column="rangeBinEndIndex"    />
+        <result property="unwrapphasepeakMm"    column="unwrapPhasePeak_mm"    />
+        <result property="heartrateestFft"    column="heartRateEst_FFT"    />
+        <result property="heartrateestFft4hz"    column="heartRateEst_FFT_4Hz"    />
+        <result property="heartrateestXcorr"    column="heartRateEst_xCorr"    />
+        <result property="heartrateestPeakcountFiltered"    column="heartRateEst_peakCount_filtered"    />
+        <result property="breathingrateestFft"    column="breathingRateEst_FFT"    />
+        <result property="breathingrateestXcorr"    column="breathingRateEst_xCorr"    />
+        <result property="breathingrateestPeakcount"    column="breathingRateEst_peakCount"    />
+        <result property="confidencemetricbreathout"    column="confidenceMetricBreathOut"    />
+        <result property="confidencemetricbreathoutXcorr"    column="confidenceMetricBreathOut_xCorr"    />
+        <result property="confidencemetricheartout"    column="confidenceMetricHeartOut"    />
+        <result property="confidencemetricheartout4hz"    column="confidenceMetricHeartOut_4Hz"    />
+        <result property="confidencemetricheartoutXcorr"    column="confidenceMetricHeartOut_xCorr"    />
+        <result property="sumenergybreathwfm"    column="sumEnergyBreathWfm"    />
+        <result property="sumenergyheartwfm"    column="sumEnergyHeartWfm"    />
+        <result property="motiondetectedflag"    column="motionDetectedFlag"    />
+        <result property="breathingrateestHarmonicenergy"    column="breathingRateEst_harmonicEnergy"    />
+        <result property="heartrateestHarmonicenergy"    column="heartRateEst_harmonicEnergy"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectBreathHeartMonitorVo">
+        select id, device_id, time, frame_id, outputFilterBreathOut, outputFilterHeartOut, BreathingRate_Out, heartRate_Out, rangeBinIndexMax, rangeBinIndexPhase, maxVal, processingCyclesOut, rangeBinStartIndex, rangeBinEndIndex, unwrapPhasePeak_mm, heartRateEst_FFT, heartRateEst_FFT_4Hz, heartRateEst_xCorr, heartRateEst_peakCount_filtered, breathingRateEst_FFT, breathingRateEst_xCorr, breathingRateEst_peakCount, confidenceMetricBreathOut, confidenceMetricBreathOut_xCorr, confidenceMetricHeartOut, confidenceMetricHeartOut_4Hz, confidenceMetricHeartOut_xCorr, sumEnergyBreathWfm, sumEnergyHeartWfm, motionDetectedFlag, breathingRateEst_harmonicEnergy, heartRateEst_harmonicEnergy, update_by, update_time, create_by, create_time from breath_heart_monitor
+    </sql>
+
+    <select id="selectBreathHeartMonitorList" parameterType="BreathHeartMonitor" resultMap="BreathHeartMonitorResult">
+        <include refid="selectBreathHeartMonitorVo"/>
+        <where>
+            <if test="deviceId != null "> and device_id = #{deviceId}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="frameId != null "> and frame_id = #{frameId}</if>
+            <if test="outputfilterbreathout != null "> and outputFilterBreathOut = #{outputfilterbreathout}</if>
+            <if test="outputfilterheartout != null "> and outputFilterHeartOut = #{outputfilterheartout}</if>
+            <if test="breathingrateOut != null "> and BreathingRate_Out = #{breathingrateOut}</if>
+            <if test="heartrateOut != null "> and heartRate_Out = #{heartrateOut}</if>
+            <if test="rangebinindexmax != null "> and rangeBinIndexMax = #{rangebinindexmax}</if>
+            <if test="rangebinindexphase != null "> and rangeBinIndexPhase = #{rangebinindexphase}</if>
+            <if test="maxval != null "> and maxVal = #{maxval}</if>
+            <if test="processingcyclesout != null "> and processingCyclesOut = #{processingcyclesout}</if>
+            <if test="rangebinstartindex != null "> and rangeBinStartIndex = #{rangebinstartindex}</if>
+            <if test="rangebinendindex != null "> and rangeBinEndIndex = #{rangebinendindex}</if>
+            <if test="unwrapphasepeakMm != null "> and unwrapPhasePeak_mm = #{unwrapphasepeakMm}</if>
+            <if test="heartrateestFft != null "> and heartRateEst_FFT = #{heartrateestFft}</if>
+            <if test="heartrateestFft4hz != null "> and heartRateEst_FFT_4Hz = #{heartrateestFft4hz}</if>
+            <if test="heartrateestXcorr != null "> and heartRateEst_xCorr = #{heartrateestXcorr}</if>
+            <if test="heartrateestPeakcountFiltered != null "> and heartRateEst_peakCount_filtered = #{heartrateestPeakcountFiltered}</if>
+            <if test="breathingrateestFft != null "> and breathingRateEst_FFT = #{breathingrateestFft}</if>
+            <if test="breathingrateestXcorr != null "> and breathingRateEst_xCorr = #{breathingrateestXcorr}</if>
+            <if test="breathingrateestPeakcount != null "> and breathingRateEst_peakCount = #{breathingrateestPeakcount}</if>
+            <if test="confidencemetricbreathout != null "> and confidenceMetricBreathOut = #{confidencemetricbreathout}</if>
+            <if test="confidencemetricbreathoutXcorr != null "> and confidenceMetricBreathOut_xCorr = #{confidencemetricbreathoutXcorr}</if>
+            <if test="confidencemetricheartout != null "> and confidenceMetricHeartOut = #{confidencemetricheartout}</if>
+            <if test="confidencemetricheartout4hz != null "> and confidenceMetricHeartOut_4Hz = #{confidencemetricheartout4hz}</if>
+            <if test="confidencemetricheartoutXcorr != null "> and confidenceMetricHeartOut_xCorr = #{confidencemetricheartoutXcorr}</if>
+            <if test="sumenergybreathwfm != null "> and sumEnergyBreathWfm = #{sumenergybreathwfm}</if>
+            <if test="sumenergyheartwfm != null "> and sumEnergyHeartWfm = #{sumenergyheartwfm}</if>
+            <if test="motiondetectedflag != null "> and motionDetectedFlag = #{motiondetectedflag}</if>
+            <if test="breathingrateestHarmonicenergy != null "> and breathingRateEst_harmonicEnergy = #{breathingrateestHarmonicenergy}</if>
+            <if test="heartrateestHarmonicenergy != null "> and heartRateEst_harmonicEnergy = #{heartrateestHarmonicenergy}</if>
+        </where>
+    </select>
+
+    <select id="selectBreathHeartMonitorById" parameterType="Long" resultMap="BreathHeartMonitorResult">
+        <include refid="selectBreathHeartMonitorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBreathHeartMonitor" parameterType="BreathHeartMonitor" useGeneratedKeys="true" keyProperty="id">
+        insert into breath_heart_monitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">device_id,</if>
+            <if test="time != null">time,</if>
+            <if test="frameId != null">frame_id,</if>
+            <if test="outputfilterbreathout != null">outputFilterBreathOut,</if>
+            <if test="outputfilterheartout != null">outputFilterHeartOut,</if>
+            <if test="breathingrateOut != null">BreathingRate_Out,</if>
+            <if test="heartrateOut != null">heartRate_Out,</if>
+            <if test="rangebinindexmax != null">rangeBinIndexMax,</if>
+            <if test="rangebinindexphase != null">rangeBinIndexPhase,</if>
+            <if test="maxval != null">maxVal,</if>
+            <if test="processingcyclesout != null">processingCyclesOut,</if>
+            <if test="rangebinstartindex != null">rangeBinStartIndex,</if>
+            <if test="rangebinendindex != null">rangeBinEndIndex,</if>
+            <if test="unwrapphasepeakMm != null">unwrapPhasePeak_mm,</if>
+            <if test="heartrateestFft != null">heartRateEst_FFT,</if>
+            <if test="heartrateestFft4hz != null">heartRateEst_FFT_4Hz,</if>
+            <if test="heartrateestXcorr != null">heartRateEst_xCorr,</if>
+            <if test="heartrateestPeakcountFiltered != null">heartRateEst_peakCount_filtered,</if>
+            <if test="breathingrateestFft != null">breathingRateEst_FFT,</if>
+            <if test="breathingrateestXcorr != null">breathingRateEst_xCorr,</if>
+            <if test="breathingrateestPeakcount != null">breathingRateEst_peakCount,</if>
+            <if test="confidencemetricbreathout != null">confidenceMetricBreathOut,</if>
+            <if test="confidencemetricbreathoutXcorr != null">confidenceMetricBreathOut_xCorr,</if>
+            <if test="confidencemetricheartout != null">confidenceMetricHeartOut,</if>
+            <if test="confidencemetricheartout4hz != null">confidenceMetricHeartOut_4Hz,</if>
+            <if test="confidencemetricheartoutXcorr != null">confidenceMetricHeartOut_xCorr,</if>
+            <if test="sumenergybreathwfm != null">sumEnergyBreathWfm,</if>
+            <if test="sumenergyheartwfm != null">sumEnergyHeartWfm,</if>
+            <if test="motiondetectedflag != null">motionDetectedFlag,</if>
+            <if test="breathingrateestHarmonicenergy != null">breathingRateEst_harmonicEnergy,</if>
+            <if test="heartrateestHarmonicenergy != null">heartRateEst_harmonicEnergy,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="time != null">#{time},</if>
+            <if test="frameId != null">#{frameId},</if>
+            <if test="outputfilterbreathout != null">#{outputfilterbreathout},</if>
+            <if test="outputfilterheartout != null">#{outputfilterheartout},</if>
+            <if test="breathingrateOut != null">#{breathingrateOut},</if>
+            <if test="heartrateOut != null">#{heartrateOut},</if>
+            <if test="rangebinindexmax != null">#{rangebinindexmax},</if>
+            <if test="rangebinindexphase != null">#{rangebinindexphase},</if>
+            <if test="maxval != null">#{maxval},</if>
+            <if test="processingcyclesout != null">#{processingcyclesout},</if>
+            <if test="rangebinstartindex != null">#{rangebinstartindex},</if>
+            <if test="rangebinendindex != null">#{rangebinendindex},</if>
+            <if test="unwrapphasepeakMm != null">#{unwrapphasepeakMm},</if>
+            <if test="heartrateestFft != null">#{heartrateestFft},</if>
+            <if test="heartrateestFft4hz != null">#{heartrateestFft4hz},</if>
+            <if test="heartrateestXcorr != null">#{heartrateestXcorr},</if>
+            <if test="heartrateestPeakcountFiltered != null">#{heartrateestPeakcountFiltered},</if>
+            <if test="breathingrateestFft != null">#{breathingrateestFft},</if>
+            <if test="breathingrateestXcorr != null">#{breathingrateestXcorr},</if>
+            <if test="breathingrateestPeakcount != null">#{breathingrateestPeakcount},</if>
+            <if test="confidencemetricbreathout != null">#{confidencemetricbreathout},</if>
+            <if test="confidencemetricbreathoutXcorr != null">#{confidencemetricbreathoutXcorr},</if>
+            <if test="confidencemetricheartout != null">#{confidencemetricheartout},</if>
+            <if test="confidencemetricheartout4hz != null">#{confidencemetricheartout4hz},</if>
+            <if test="confidencemetricheartoutXcorr != null">#{confidencemetricheartoutXcorr},</if>
+            <if test="sumenergybreathwfm != null">#{sumenergybreathwfm},</if>
+            <if test="sumenergyheartwfm != null">#{sumenergyheartwfm},</if>
+            <if test="motiondetectedflag != null">#{motiondetectedflag},</if>
+            <if test="breathingrateestHarmonicenergy != null">#{breathingrateestHarmonicenergy},</if>
+            <if test="heartrateestHarmonicenergy != null">#{heartrateestHarmonicenergy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+
+    <insert id="insertBreathHeartMonitor2" parameterType="BreathHeartMonitor" useGeneratedKeys="true" keyProperty="id">
+        insert into breath_heart_monitor set device_id=#{deviceId},time=#{time},frame_id=#{frameId},outputFilterBreathOut=#{outputfilterbreathout},outputFilterHeartOut=#{outputfilterheartout},BreathingRate_Out=#{breathingrateOut},heartRate_Out=#{heartrateOut}
+
+<!--        insert into breath_heart_monitor(device_id,time,frame_id,outputFilterBreathOut,outputFilterHeartOut,BreathingRate_Out,heartRate_Out)values (#{deviceId},#{time},#{frameId}, #{outputfilterbreathout},#{outputfilterheartout},#{breathingrateOut}, #{heartrateOut})-->
+    </insert>
+
+    <update id="updateBreathHeartMonitor" parameterType="BreathHeartMonitor">
+        update breath_heart_monitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="frameId != null">frame_id = #{frameId},</if>
+            <if test="outputfilterbreathout != null">outputFilterBreathOut = #{outputfilterbreathout},</if>
+            <if test="outputfilterheartout != null">outputFilterHeartOut = #{outputfilterheartout},</if>
+            <if test="breathingrateOut != null">BreathingRate_Out = #{breathingrateOut},</if>
+            <if test="heartrateOut != null">heartRate_Out = #{heartrateOut},</if>
+            <if test="rangebinindexmax != null">rangeBinIndexMax = #{rangebinindexmax},</if>
+            <if test="rangebinindexphase != null">rangeBinIndexPhase = #{rangebinindexphase},</if>
+            <if test="maxval != null">maxVal = #{maxval},</if>
+            <if test="processingcyclesout != null">processingCyclesOut = #{processingcyclesout},</if>
+            <if test="rangebinstartindex != null">rangeBinStartIndex = #{rangebinstartindex},</if>
+            <if test="rangebinendindex != null">rangeBinEndIndex = #{rangebinendindex},</if>
+            <if test="unwrapphasepeakMm != null">unwrapPhasePeak_mm = #{unwrapphasepeakMm},</if>
+            <if test="heartrateestFft != null">heartRateEst_FFT = #{heartrateestFft},</if>
+            <if test="heartrateestFft4hz != null">heartRateEst_FFT_4Hz = #{heartrateestFft4hz},</if>
+            <if test="heartrateestXcorr != null">heartRateEst_xCorr = #{heartrateestXcorr},</if>
+            <if test="heartrateestPeakcountFiltered != null">heartRateEst_peakCount_filtered = #{heartrateestPeakcountFiltered},</if>
+            <if test="breathingrateestFft != null">breathingRateEst_FFT = #{breathingrateestFft},</if>
+            <if test="breathingrateestXcorr != null">breathingRateEst_xCorr = #{breathingrateestXcorr},</if>
+            <if test="breathingrateestPeakcount != null">breathingRateEst_peakCount = #{breathingrateestPeakcount},</if>
+            <if test="confidencemetricbreathout != null">confidenceMetricBreathOut = #{confidencemetricbreathout},</if>
+            <if test="confidencemetricbreathoutXcorr != null">confidenceMetricBreathOut_xCorr = #{confidencemetricbreathoutXcorr},</if>
+            <if test="confidencemetricheartout != null">confidenceMetricHeartOut = #{confidencemetricheartout},</if>
+            <if test="confidencemetricheartout4hz != null">confidenceMetricHeartOut_4Hz = #{confidencemetricheartout4hz},</if>
+            <if test="confidencemetricheartoutXcorr != null">confidenceMetricHeartOut_xCorr = #{confidencemetricheartoutXcorr},</if>
+            <if test="sumenergybreathwfm != null">sumEnergyBreathWfm = #{sumenergybreathwfm},</if>
+            <if test="sumenergyheartwfm != null">sumEnergyHeartWfm = #{sumenergyheartwfm},</if>
+            <if test="motiondetectedflag != null">motionDetectedFlag = #{motiondetectedflag},</if>
+            <if test="breathingrateestHarmonicenergy != null">breathingRateEst_harmonicEnergy = #{breathingrateestHarmonicenergy},</if>
+            <if test="heartrateestHarmonicenergy != null">heartRateEst_harmonicEnergy = #{heartrateestHarmonicenergy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBreathHeartMonitorById" parameterType="Long">
+        delete from breath_heart_monitor where id = #{id}
+    </delete>
+
+    <delete id="deleteBreathHeartMonitorByIds" parameterType="String">
+        delete from breath_heart_monitor where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <resultMap id="selectoutputFilterResult" type="java.util.Map">
+        <result property="outputFilterBreathOut" column="outputFilterBreathOut"/>
+        <result property="outputFilterHeartOut" column="outputFilterHeartOut"/>
+    </resultMap>
+
+        <select id="selectoutputFilter" resultMap="selectoutputFilterResult">
+            SELECT outputFilterBreathOut,outputFilterHeartOut from breath_heart_monitor ORDER BY create_time DESC LIMIT 0,100;
+        </select>
+
+    <resultMap id="selectratoutResult" type="java.util.Map">
+        <result property="BreathingRateOut" column="BreathingRate_Out"/>
+        <result property="heartRateOut" column="heartRate_Out"/>
+    </resultMap>
+
+    <select id="selectratout" resultMap="selectratoutResult">
+        SELECT BreathingRate_Out,heartRate_Out,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') as create_time from breath_heart_monitor ORDER BY create_time DESC LIMIT 0,200;
+    </select>
+
+    <resultMap id="selectratout2Result" type="java.util.Map">
+        <result property="BreathingRateOut" column="BreathingRate_Out"/>
+        <result property="heartRateOut" column="heartRate_Out"/>
+    </resultMap>
+
+    <select id="selectratout2" resultMap="selectratout2Result">
+        select heartRate_Out,BreathingRate_Out FROM breath_heart_monitor  ORDER BY create_time DESC LIMIT 0,1;
+    </select>
+
+</mapper>

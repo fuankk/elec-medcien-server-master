@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.elecmed.mapper.DarmaAgreementMapper">
+
+    <resultMap type="DarmaAgreement" id="DarmaAgreementResult">
+        <result property="rawData"    column="raw_data"    />
+        <result property="heartbeatWaveform"    column="heartbeat_waveform"    />
+        <result property="breathWaveform"    column="breath_waveform"    />
+        <result property="id"    column="id"    />
+        <result property="heartRat"    column="heart_rat"    />
+        <result property="breathRat"    column="breath_rat"    />
+        <result property="signType"    column="sign_type"    />
+        <result property="signQuality"    column="sign_quality"    />
+        <result property="mentalStress"    column="mental_stress"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectDarmaAgreementVo">
+        select raw_data, heartbeat_waveform, breath_waveform, id, heart_rat, breath_rat, sign_type, sign_quality, mental_stress, update_by, update_time, create_by, create_time, user_id from darma_agreement
+    </sql>
+
+    <select id="selectDarmaAgreementList" parameterType="DarmaAgreement" resultMap="DarmaAgreementResult">
+        <include refid="selectDarmaAgreementVo"/>
+        <where>
+            <if test="rawData != null "> and raw_data = #{rawData}</if>
+            <if test="heartbeatWaveform != null "> and heartbeat_waveform = #{heartbeatWaveform}</if>
+            <if test="breathWaveform != null "> and breath_waveform = #{breathWaveform}</if>
+            <if test="heartRat != null "> and heart_rat = #{heartRat}</if>
+            <if test="breathRat != null "> and breath_rat = #{breathRat}</if>
+            <if test="signType != null "> and sign_type = #{signType}</if>
+            <if test="signQuality != null "> and sign_quality = #{signQuality}</if>
+            <if test="mentalStress != null "> and mental_stress = #{mentalStress}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <select id="selectDarmaAgreementById" parameterType="Long" resultMap="DarmaAgreementResult">
+        <include refid="selectDarmaAgreementVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDarmaAgreement">
+            insert into darma_agreement(raw_data,heartbeat_waveform,breath_waveform,heart_rat,breath_rat,
+    sign_type,sign_quality,mental_stress,user_id)values(#{rawData},#{heartbeatWaveform},#{breathWaveform},
+    #{heartRat},#{breathRat},#{signType},#{signQuality},#{mentalStress},#{userId})
+<!--            parameterType="DarmaAgreement" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into darma_agreement-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="rawData != null">raw_data,</if>-->
+<!--            <if test="heartbeatWaveform != null">heartbeat_waveform,</if>-->
+<!--            <if test="breathWaveform != null">breath_waveform,</if>-->
+<!--            <if test="heartRat != null">heart_rat,</if>-->
+<!--            <if test="breathRat != null">breath_rat,</if>-->
+<!--            <if test="signType != null">sign_type,</if>-->
+<!--            <if test="signQuality != null">sign_quality,</if>-->
+<!--            <if test="mentalStress != null">mental_stress,</if>-->
+<!--            <if test="updateBy != null">update_by,</if>-->
+<!--            <if test="updateTime != null">update_time,</if>-->
+<!--            <if test="createBy != null">create_by,</if>-->
+<!--            <if test="createTime != null">create_time,</if>-->
+<!--            <if test="userId != null">user_id,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="rawData != null">#{rawData},</if>-->
+<!--            <if test="heartbeatWaveform != null">#{heartbeatWaveform},</if>-->
+<!--            <if test="breathWaveform != null">#{breathWaveform},</if>-->
+<!--            <if test="heartRat != null">#{heartRat},</if>-->
+<!--            <if test="breathRat != null">#{breathRat},</if>-->
+<!--            <if test="signType != null">#{signType},</if>-->
+<!--            <if test="signQuality != null">#{signQuality},</if>-->
+<!--            <if test="mentalStress != null">#{mentalStress},</if>-->
+<!--            <if test="updateBy != null">#{updateBy},</if>-->
+<!--            <if test="updateTime != null">#{updateTime},</if>-->
+<!--            <if test="createBy != null">#{createBy},</if>-->
+<!--            <if test="createTime != null">#{createTime},</if>-->
+<!--            <if test="userId != null">#{userId},</if>-->
+<!--         </trim>-->
+    </insert>
+
+    <update id="updateDarmaAgreement" parameterType="DarmaAgreement">
+        update darma_agreement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rawData != null">raw_data = #{rawData},</if>
+            <if test="heartbeatWaveform != null">heartbeat_waveform = #{heartbeatWaveform},</if>
+            <if test="breathWaveform != null">breath_waveform = #{breathWaveform},</if>
+            <if test="heartRat != null">heart_rat = #{heartRat},</if>
+            <if test="breathRat != null">breath_rat = #{breathRat},</if>
+            <if test="signType != null">sign_type = #{signType},</if>
+            <if test="signQuality != null">sign_quality = #{signQuality},</if>
+            <if test="mentalStress != null">mental_stress = #{mentalStress},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDarmaAgreementById" parameterType="Long">
+        delete from darma_agreement where id = #{id}
+    </delete>
+
+    <delete id="deleteDarmaAgreementByIds" parameterType="String">
+        delete from darma_agreement where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <resultMap id="selectagreementResult" type="java.util.Map">
+        <result property="heartbeatWaveform" column="heartbeat_waveform"/>
+        <result property="createTime" column="create_time"/>
+        <result property="breathWaveform" column="breath_waveform"/>
+        <result property="heartRat" column="heart_rat"/>
+        <result property="breathRat" column="breath_rat"/>
+        <result property="highPressure" column="high_pressure"/>
+        <result property="lowPressure" column="low_pressure"/>
+        <result property="outputFilterBreathOut" column="outputFilterBreathOut"/>
+        <result property="outputFilterHeartOut" column="outputFilterHeartOut"/>
+    </resultMap>
+
+    <select id="selectagreement" resultMap="selectagreementResult">
+        select x.heartbeat_waveform,x.breath_waveform,x.heart_rat,x.breath_rat,y.high_pressure,y.low_pressure,z.outputFilterHeartOut,z.outputFilterBreathOut  from
+        darma_agreement  x,blood_pressure_waveform y ,breath_heart_monitor z
+        where x.create_time=#{createTime} and y.create_time=#{createTime} and z.create_time=#{createTime}
+    </select>
+
+    <resultMap id="selectwaveformResult" type="java.util.Map">
+        <result property="heartbeatWaveform" column="heartbeat_waveform"/>
+        <result property="breathWaveform" column="breath_waveform"/>
+    </resultMap>
+
+    <select id="selectwaveform" resultMap="selectwaveformResult">
+        SELECT heartbeat_waveform,breath_waveform,user_id from darma_agreement where user_id=1 ORDER BY create_time DESC LIMIT 0,100;
+    </select>
+
+    <resultMap id="selectwaveform4Result" type="java.util.Map">
+        <result property="heartbeatWaveform" column="heartbeat_waveform"/>
+        <result property="breathWaveform" column="breath_waveform"/>
+    </resultMap>
+
+    <select id="selectwaveform4" resultMap="selectwaveform4Result">
+        SELECT heartbeat_waveform,breath_waveform,user_id from darma_agreement where user_id=2 ORDER BY create_time DESC LIMIT 0,100;
+    </select>
+
+<!--    <select id="selectwaveform" resultMap="selectwaveformResult">-->
+<!--        SELECT heartbeat_waveform,breath_waveform from darma_agreement-->
+<!--    </select>-->
+
+    <resultMap id="selectwaveform2Result" type="java.util.Map">
+        <result property="heartRat" column="heart_rat"/>
+        <result property="breathRat" column="breath_rat"/>
+    </resultMap>
+
+    <select id="selectwaveform2" resultMap="selectwaveform2Result">
+        SELECT heart_rat,breath_rat,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') as create_time from darma_agreement where user_id=1 ORDER BY create_time DESC LIMIT 0,200;
+    </select>
+
+    <resultMap id="selectwaveform5Result" type="java.util.Map">
+        <result property="heartRat" column="heart_rat"/>
+        <result property="breathRat" column="breath_rat"/>
+    </resultMap>
+
+    <select id="selectwaveform5" resultMap="selectwaveform5Result">
+        SELECT heart_rat,breath_rat,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') as create_time from darma_agreement where user_id=2 ORDER BY create_time DESC LIMIT 0,200;
+    </select>
+
+    <resultMap id="selectwaveform3Result" type="java.util.Map">
+        <result property="heartRat" column="heart_rat"/>
+        <result property="breathRat" column="breath_rat"/>
+    </resultMap>
+
+    <select id="selectwaveform3" resultMap="selectwaveform3Result">
+        SELECT heart_rat,breath_rat,user_id from darma_agreement where user_id=1 ORDER BY create_time DESC LIMIT 0,1;
+    </select>
+
+    <resultMap id="selectwaveform6Result" type="java.util.Map">
+        <result property="heartRat" column="heart_rat"/>
+        <result property="breathRat" column="breath_rat"/>
+    </resultMap>
+
+    <select id="selectwaveform6" resultMap="selectwaveform6Result">
+        SELECT heart_rat,breath_rat,user_id from darma_agreement where user_id=2 ORDER BY create_time DESC LIMIT 0,1;
+    </select>
+</mapper>

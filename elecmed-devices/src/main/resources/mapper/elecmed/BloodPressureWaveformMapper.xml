@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.elecmed.mapper.BloodPressureWaveformMapper">
+    
+    <resultMap type="BloodPressureWaveform" id="BloodPressureWaveformResult">
+        <result property="id"    column="id"    />
+        <result property="time"    column="time"    />
+        <result property="highPressure"    column="high_pressure"    />
+        <result property="lowPressure"    column="low_pressure"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectBloodPressureWaveformVo">
+        select id, time, high_pressure, low_pressure, update_by, update_time, create_by, create_time, user_id from blood_pressure_waveform
+    </sql>
+
+    <select id="selectBloodPressureWaveformList" parameterType="BloodPressureWaveform" resultMap="BloodPressureWaveformResult">
+        <include refid="selectBloodPressureWaveformVo"/>
+        <where>  
+            <if test="time != null "> and time = #{time}</if>
+            <if test="highPressure != null "> and high_pressure = #{highPressure}</if>
+            <if test="lowPressure != null "> and low_pressure = #{lowPressure}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectBloodPressureWaveformById" parameterType="Long" resultMap="BloodPressureWaveformResult">
+        <include refid="selectBloodPressureWaveformVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBloodPressureWaveform" parameterType="BloodPressureWaveform" useGeneratedKeys="true" keyProperty="id">
+        insert into blood_pressure_waveform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="time != null">time,</if>
+            <if test="highPressure != null">high_pressure,</if>
+            <if test="lowPressure != null">low_pressure,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="time != null">#{time},</if>
+            <if test="highPressure != null">#{highPressure},</if>
+            <if test="lowPressure != null">#{lowPressure},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBloodPressureWaveform" parameterType="BloodPressureWaveform">
+        update blood_pressure_waveform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="time != null">time = #{time},</if>
+            <if test="highPressure != null">high_pressure = #{highPressure},</if>
+            <if test="lowPressure != null">low_pressure = #{lowPressure},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBloodPressureWaveformById" parameterType="Long">
+        delete from blood_pressure_waveform where id = #{id}
+    </delete>
+
+    <delete id="deleteBloodPressureWaveformByIds" parameterType="String">
+        delete from blood_pressure_waveform where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

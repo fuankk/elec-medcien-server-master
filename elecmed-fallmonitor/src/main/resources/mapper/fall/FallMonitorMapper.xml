@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.fall.mapper.FallMonitorMapper">
+    
+    <resultMap type="FallMonitor" id="FallMonitorResult">
+        <result property="id"    column="id"    />
+        <result property="deviceId"    column="device_id"    />
+        <result property="time"    column="time"    />
+        <result property="frameId"    column="frame_id"    />
+        <result property="trackId"    column="track_id"    />
+        <result property="positionx"    column="positionx"    />
+        <result property="positiony"    column="positiony"    />
+        <result property="positionz"    column="positionz"    />
+        <result property="smoothpositionz"    column="smoothpositionz"    />
+        <result property="mark"    column="mark"    />
+    </resultMap>
+
+    <sql id="selectFallMonitorVo">
+        select id, device_id, time, frame_id, track_id, positionx, positiony, positionz, smoothpositionz, mark from fall_monitor
+    </sql>
+
+    <select id="selectFallMonitorList" parameterType="FallMonitor" resultMap="FallMonitorResult">
+        <include refid="selectFallMonitorVo"/>
+        <where>  
+            <if test="deviceId != null "> and device_id = #{deviceId}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="frameId != null "> and frame_id = #{frameId}</if>
+            <if test="trackId != null "> and track_id = #{trackId}</if>
+            <if test="positionx != null "> and positionx = #{positionx}</if>
+            <if test="positiony != null "> and positiony = #{positiony}</if>
+            <if test="positionz != null "> and positionz = #{positionz}</if>
+            <if test="smoothpositionz != null "> and smoothpositionz = #{smoothpositionz}</if>
+            <if test="mark != null "> and mark = #{mark}</if>
+        </where>
+    </select>
+    
+    <select id="selectFallMonitorById" parameterType="Long" resultMap="FallMonitorResult">
+        <include refid="selectFallMonitorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFallMonitor" parameterType="FallMonitor">
+        insert into fall_monitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="time != null">time,</if>
+            <if test="frameId != null">frame_id,</if>
+            <if test="trackId != null">track_id,</if>
+            <if test="positionx != null">positionx,</if>
+            <if test="positiony != null">positiony,</if>
+            <if test="positionz != null">positionz,</if>
+            <if test="smoothpositionz != null">smoothpositionz,</if>
+            <if test="mark != null">mark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="time != null">#{time},</if>
+            <if test="frameId != null">#{frameId},</if>
+            <if test="trackId != null">#{trackId},</if>
+            <if test="positionx != null">#{positionx},</if>
+            <if test="positiony != null">#{positiony},</if>
+            <if test="positionz != null">#{positionz},</if>
+            <if test="smoothpositionz != null">#{smoothpositionz},</if>
+            <if test="mark != null">#{mark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFallMonitor" parameterType="FallMonitor">
+        update fall_monitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="frameId != null">frame_id = #{frameId},</if>
+            <if test="trackId != null">track_id = #{trackId},</if>
+            <if test="positionx != null">positionx = #{positionx},</if>
+            <if test="positiony != null">positiony = #{positiony},</if>
+            <if test="positionz != null">positionz = #{positionz},</if>
+            <if test="smoothpositionz != null">smoothpositionz = #{smoothpositionz},</if>
+            <if test="mark != null">mark = #{mark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFallMonitorById" parameterType="Long">
+        delete from fall_monitor where id = #{id}
+    </delete>
+
+    <delete id="deleteFallMonitorByIds" parameterType="String">
+        delete from fall_monitor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

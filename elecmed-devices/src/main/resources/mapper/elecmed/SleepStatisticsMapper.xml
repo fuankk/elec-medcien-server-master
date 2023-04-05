@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.elecmed.mapper.SleepStatisticsMapper">
+    
+    <resultMap type="SleepStatistics" id="SleepStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="deepSleep"    column="deep_sleep"    />
+        <result property="shallowSleep"    column="shallow_sleep"    />
+        <result property="sleepTime"    column="sleep_time"    />
+        <result property="breathQuality"    column="breath_quality"    />
+        <result property="wakeTimes"    column="wake_times"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectSleepStatisticsVo">
+        select id, deep_sleep, shallow_sleep, sleep_time, breath_quality, wake_times, create_by, create_time, update_by, update_time, user_id from sleep_statistics
+    </sql>
+
+    <select id="selectSleepStatisticsList" parameterType="SleepStatistics" resultMap="SleepStatisticsResult">
+        <include refid="selectSleepStatisticsVo"/>
+        <where>  
+            <if test="deepSleep != null "> and deep_sleep = #{deepSleep}</if>
+            <if test="shallowSleep != null "> and shallow_sleep = #{shallowSleep}</if>
+            <if test="sleepTime != null "> and sleep_time = #{sleepTime}</if>
+            <if test="breathQuality != null "> and breath_quality = #{breathQuality}</if>
+            <if test="wakeTimes != null  and wakeTimes != ''"> and wake_times = #{wakeTimes}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSleepStatisticsById" parameterType="Long" resultMap="SleepStatisticsResult">
+        <include refid="selectSleepStatisticsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSleepStatistics" parameterType="SleepStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into sleep_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deepSleep != null">deep_sleep,</if>
+            <if test="shallowSleep != null">shallow_sleep,</if>
+            <if test="sleepTime != null">sleep_time,</if>
+            <if test="breathQuality != null">breath_quality,</if>
+            <if test="wakeTimes != null">wake_times,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deepSleep != null">#{deepSleep},</if>
+            <if test="shallowSleep != null">#{shallowSleep},</if>
+            <if test="sleepTime != null">#{sleepTime},</if>
+            <if test="breathQuality != null">#{breathQuality},</if>
+            <if test="wakeTimes != null">#{wakeTimes},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSleepStatistics" parameterType="SleepStatistics">
+        update sleep_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deepSleep != null">deep_sleep = #{deepSleep},</if>
+            <if test="shallowSleep != null">shallow_sleep = #{shallowSleep},</if>
+            <if test="sleepTime != null">sleep_time = #{sleepTime},</if>
+            <if test="breathQuality != null">breath_quality = #{breathQuality},</if>
+            <if test="wakeTimes != null">wake_times = #{wakeTimes},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSleepStatisticsById" parameterType="Long">
+        delete from sleep_statistics where id = #{id}
+    </delete>
+
+    <delete id="deleteSleepStatisticsByIds" parameterType="String">
+        delete from sleep_statistics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
